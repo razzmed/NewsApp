@@ -1,7 +1,7 @@
 package com.example.newsapp.model
 
 data class Source(
-    var id: Int?,
+    var id: String?,
     var name: String?
 )
 
@@ -12,6 +12,6 @@ data class Articles(
     var description: String?,
     var url: String?,
     var publishedAt: String?,
-    var content: String? 
+    var content: String?
 
 )

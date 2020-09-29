@@ -1,5 +1,9 @@
 package com.example.newsapp.model
 
-/**
- * Created by Karukes Sergey on
- */
+data class ResponseBody(
+    var status: String?,
+    var totalResults: Int?,
+    var articles: MutableList<Articles>,
+    var message: String?,
+    var code: String?
+)
