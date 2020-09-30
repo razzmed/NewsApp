@@ -1,5 +1,6 @@
 package com.example.newsapp.repository
 
+import androidx.lifecycle.MutableLiveData
 import com.example.newsapp.AppNews
 import com.example.newsapp.Constants
 import com.example.newsapp.model.Articles
@@ -12,8 +13,8 @@ import retrofit2.Response
 class NewsRepository {
 
     private val everythingDefaultSize = 10
-    fun fetchEverything(query: String?): MutableList<Articles>? {
-        var data: MutableList<Articles>? = mutableListOf()
+    fun fetchEverything(query: String?): MutableLiveData<MutableList<Articles>>? {
+        var data: MutableLiveData<MutableList<Articles>>? = MutableLiveData()
         AppNews().provideNews().fetchEverything(query, Constants.apiKey, everythingDefaultSize).enqueue(object :
             Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -23,7 +24,7 @@ class NewsRepository {
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 //404 - не найдено, 401 - нет доступа, 403 - токен истек
-                data = response.body()?.articles
+                data?.value = response.body()?.articles
             }
         })
         return data

@@ -8,10 +8,10 @@ import com.example.newsapp.repository.NewsRepository
 
 class NewsViewModel : ViewModel() {
 
-    val articles = MutableLiveData<MutableList<Articles>>()
+    var articles = MutableLiveData<MutableList<Articles>>()
 
     fun fetchEverything(query: String) {
-        articles.value = NewsRepository().fetchEverything(query)
+        articles = NewsRepository().fetchEverything(query)!!
     }
 
 }
