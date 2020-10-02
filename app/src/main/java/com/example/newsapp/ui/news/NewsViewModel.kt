@@ -8,10 +8,17 @@ import com.example.newsapp.repository.NewsRepository
 
 class NewsViewModel : ViewModel() {
 
-    var articles = MutableLiveData<MutableList<Articles>>()
 
-    fun fetchEverything(query: String) {
-        articles = NewsRepository().fetchEverything(query)!!
+    var isLastPage = false
+    var page = 0
+
+    fun fetchEverything(query: String): MutableLiveData<MutableList<Articles>?> {
+        page += 1
+        return NewsRepository().fetchEverything(query, page)
+    }
+
+    fun fetchTopHeadlines(): MutableLiveData<MutableList<Articles>?>  {
+        return NewsRepository().fetchTopHeadlines()
     }
 
 }
