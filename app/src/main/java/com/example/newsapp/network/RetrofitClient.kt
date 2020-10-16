@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit
 
 
 class RetrofitClient {
+
     private val BASE_URL = "https://newsapi.org/"
 
     private var okHttpClient: OkHttpClient = OkHttpClient()

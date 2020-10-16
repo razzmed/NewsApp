@@ -13,38 +13,39 @@ class NewsRepository {
 
     private val defaultSize = 10
 
-    fun fetchEverything(query: String?, page: Int?): MutableLiveData<MutableList<Articles>?> {
-        val data: MutableLiveData<MutableList<Articles>?> = MutableLiveData()
-        AppNews().provideNews().fetchEverything(query, Constants.apiKey, defaultSize, page).enqueue(object :
-            Callback<ResponseBody> {
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                //500.. и выше
-                data.value = null
-            }
+    private val ru = "ru"
 
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                //404 - не найдено, 401 - нет доступа, 403 - токен истек
-                data.value = response.body()?.articles
+    fun fetchEverything(query: String?, page: Int): MutableLiveData<MutableList<Articles>>? {
+        var data: MutableLiveData<MutableList<Articles>>? = MutableLiveData()
+        AppNews().provideNews().fetchEverything(query, Constants.apiKey, page, defaultSize)
+            .enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    //404 - не найдено, 401 - нет доступа, 403 - токен истек
+                    data?.value = response.body()?.articles
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                //500.. и выше
+                data = null
             }
         })
         return data
     }
-    private val country = "us"
-    fun fetchTopHeadlines(): MutableLiveData<MutableList<Articles>?> {
-        val data: MutableLiveData<MutableList<Articles>?> = MutableLiveData()
-        AppNews().provideNews().fetchTopHeadlines(country, Constants.apiKey).enqueue(object :
-            Callback<ResponseBody> {
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                //500.. и выше
-                data.value = null
-            }
-
+    fun fetchTopHeadlines(page: Int): MutableLiveData<MutableList<Articles>>? {
+        var dataTop: MutableLiveData<MutableList<Articles>>? = MutableLiveData()
+        AppNews().provideNews().fetchTopHeadlines(ru, Constants.apiKey)
+            .enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 //404 - не найдено, 401 - нет доступа, 403 - токен истек
-                data.value = response.body()?.articles
+                dataTop?.value = response.body()?.articles
             }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                //500.. и выше
+                dataTop = null
+            }
+
         })
-        return data
+        return dataTop
     }
 
 }
