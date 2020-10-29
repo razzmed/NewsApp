@@ -1,9 +1,11 @@
 package com.example.newsapp.model
 
+import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.*
 import com.example.newsapp.utils.SourceTypeConverter
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Source(
     var id: String?,
@@ -29,9 +31,10 @@ data class Articles(
     var publishedAt: String?,
     @SerializedName("content")
     var content: String?,
+    var isFavorite: Boolean = false,
     @NonNull
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
     var id: Int?
 
-)
+) : Serializable

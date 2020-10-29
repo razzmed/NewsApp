@@ -8,17 +8,19 @@ import retrofit2.http.Query
 interface NewsApi {
 
     @GET("v2/everything")
-    fun fetchEverything(
+    suspend fun fetchEverything(
         @Query("q") q: String?,
         @Query("apiKey") apiKey: String,
         @Query("pageSize") size: Int,
         @Query("page") page: Int?
-    ): Call<ResponseBody>
+    ): ResponseBody
 
     @GET("v2/top-headlines")
-    fun fetchTopHeadlines(
+    suspend fun fetchTopHeadlines(
         @Query("country") country: String,
-        @Query("apiKey") apiKey: String
-    ): Call<ResponseBody>
+        @Query("apiKey") apiKey: String,
+    @Query("page") page: Int,
+    @Query("items") items: Int
+    ): ResponseBody
 
 }

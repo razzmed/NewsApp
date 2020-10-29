@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mob_nav"
+    app:startDestination="@id/menuEverything"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/menuEverything"
+        android:name="com.example.newsapp.ui.fragments.everything.EverythingFragment"
+        android:label="Everything"
+        tools:layout="@layout/fragment_everything" >
+        <action
+            android:id="@+id/action_menuEverything_to_menuTop"
+            app:destination="@id/menuTop" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/menuTop"
+        android:name="com.example.newsapp.ui.fragments.top.TopFragment"
+        android:label="Top"
+        tools:layout="@layout/fragment_top" >
+        <action
+            android:id="@+id/action_menuTop_to_menuFavorites"
+            app:destination="@id/menuFavorites" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/menuFavorites"
+        android:name="com.example.newsapp.ui.fragments.favorite.FavoritesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_menuFavorites_to_menuEverything"
+            app:destination="@id/menuEverything" />
+    </fragment>
+
+
+
+</navigation>

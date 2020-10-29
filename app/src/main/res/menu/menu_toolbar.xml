@@ -3,10 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/item_change_news"
-        android:orderInCategory="1"
-        android:title=""
-        app:showAsAction="always"
-        android:icon="@drawable/ic_change_news"/>
+        android:id="@+id/menuEverything"
+        android:icon="@drawable/ic_ever_news"
+        android:title="Everything News"/>
+
+    <item
+        android:id="@+id/menuTop"
+        android:icon="@drawable/ic_top_news"
+        android:title="Top News" />
+
+    <item
+        android:id="@+id/menuFavorites"
+        android:icon="@drawable/ic_favorite"
+        android:title="Favorite News"/>
 
 </menu>
